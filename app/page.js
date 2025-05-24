@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { getDb } from '../lib/database'
+import { getDb } from '@/lib/database'
+import PatientForm from '@/components/PatientForm'
 
 export default function Home() {
   useEffect(() => {
@@ -10,5 +11,10 @@ export default function Home() {
     })
   }, [])
 
-  return <h1>Patient Registration App</h1>
+  return (
+    <div>
+      <h1>Patient Registration App</h1>
+      <PatientForm/>
+    </div>
+  );
 }
