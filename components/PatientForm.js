@@ -7,9 +7,16 @@ const PatientForm = () => {
   const [age, setAge] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!name || !age || !email || !gender) {
+      setError(' Please fill in all fields before submitting.')
+      return
+    }
+
     const db = await getDb()
     if (!db) return
 
@@ -18,18 +25,21 @@ const PatientForm = () => {
       [name, parseInt(age), email, gender]
     )
 
-    alert('Patient registered!')
+    alert('✅ Patient registered!')
     setName('')
     setAge('')
     setEmail('')
     setGender('')
+    setError('')
   }
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '300px' }}>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+
       <div>
         <label htmlFor="name">Name:</label><br />
-        <input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter name" required />
+        <input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter name" />
       </div>
 
       <div>
