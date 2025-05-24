@@ -36,47 +36,48 @@ const PatientForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px' }}>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-      <div>
-        
-        <label htmlFor="name">Name:</label><br />
+    <form onSubmit={handleSubmit} className="form-container">
+    {error && <div className="error-message">{error}</div>}
+
+    <div className="form-group">
+        <label htmlFor="name">Name:</label>
         <input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter name" />
-      </div>
+    </div>
 
-      <div>
-        <label htmlFor="age">Age:</label><br />
+    <div className="form-group">
+        <label htmlFor="age">Age:</label>
         <input id="age" value={age} onChange={(e) => setAge(e.target.value)} type="number" placeholder="Enter age" />
-      </div>
+    </div>
 
-      <div>
-        <label htmlFor="phone">Phone Number:</label><br />
+    <div className="form-group">
+        <label htmlFor="phone">Phone Number:</label>
         <input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter phone number" />
-      </div>
+    </div>
 
-      <div>
-        <label htmlFor="gender">Gender:</label><br />
+    <div className="form-group">
+        <label htmlFor="gender">Gender:</label>
         <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="">Select gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+        <option value="">Select gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
         </select>
-      </div>
+    </div>
 
-      <div>
-        <label htmlFor="medicalHistory">Medical History:</label><br />
+    <div className="form-group">
+        <label htmlFor="medicalHistory">Medical History:</label>
         <textarea
-          id="medicalHistory"
-          value={medicalHistory}
-          onChange={(e) => setMedicalHistory(e.target.value)}
-          placeholder="Describe medical history"
-          rows={4}
+        id="medicalHistory"
+        value={medicalHistory}
+        onChange={(e) => setMedicalHistory(e.target.value)}
+        placeholder="Describe medical history"
+        rows={4}
         />
-      </div>
+    </div>
 
-      <button type="submit">Register Patient</button>
+    <button type="submit">Register Patient</button>
     </form>
+
   )
 }
 
