@@ -12,20 +12,31 @@ const PatientForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+  
     if (!name || !age || !phone || !gender || !medicalHistory) {
-      setError(' Please fill in all fields before submitting.')
+      setError('Please fill in all fields before submitting.')
       return
     }
-
+  
+    if (isNaN(age) || parseInt(age) <= 0) {
+      setError('Age must be a positive number.')
+      return
+    }
+  
+    const phoneRegex = /^[0-9]{10}$/
+    if (!phoneRegex.test(phone)) {
+      setError('Phone number must be exactly 10 digits.')
+      return
+    }
+  
     const db = await getDb()
     if (!db) return
-
+  
     await db.query(
       'INSERT INTO patients (name, age, phone, gender, medical_history) VALUES ($1, $2, $3, $4, $5)',
       [name, parseInt(age), phone, gender, medicalHistory]
     )
-
+  
     alert('Patient registered!')
     setName('')
     setAge('')
@@ -34,6 +45,7 @@ const PatientForm = () => {
     setMedicalHistory('')
     setError('')
   }
+  
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
