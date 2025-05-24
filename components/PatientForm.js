@@ -37,26 +37,24 @@ const PatientForm = () => {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px' }}>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
       <div>
-        {errors.name && <p style={{ color: 'red', margin: 0 }}>{errors.name}</p>}
+        
         <label htmlFor="name">Name:</label><br />
         <input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter name" />
       </div>
 
       <div>
-        {errors.age && <p style={{ color: 'red', margin: 0 }}>{errors.age}</p>}
         <label htmlFor="age">Age:</label><br />
         <input id="age" value={age} onChange={(e) => setAge(e.target.value)} type="number" placeholder="Enter age" />
       </div>
 
       <div>
-        {errors.phone && <p style={{ color: 'red', margin: 0 }}>{errors.phone}</p>}
         <label htmlFor="phone">Phone Number:</label><br />
         <input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter phone number" />
       </div>
 
       <div>
-        {errors.gender && <p style={{ color: 'red', margin: 0 }}>{errors.gender}</p>}
         <label htmlFor="gender">Gender:</label><br />
         <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
           <option value="">Select gender</option>
@@ -67,7 +65,6 @@ const PatientForm = () => {
       </div>
 
       <div>
-        {errors.medicalHistory && <p style={{ color: 'red', margin: 0 }}>{errors.medicalHistory}</p>}
         <label htmlFor="medicalHistory">Medical History:</label><br />
         <textarea
           id="medicalHistory"
