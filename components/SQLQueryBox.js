@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { getDb } from '@/lib/database'
+import {getDb} from '@/lib/database'
 
 const SQLQueryBox = () => {
   const [query, setQuery] = useState('SELECT * FROM patients;')
@@ -8,7 +8,6 @@ const SQLQueryBox = () => {
   const [error, setError] = useState('')
 
   const handleRunQuery = async () => {
-    console.log("clicked")
     setError('')
     try {
       const db = await getDb()
@@ -30,15 +29,38 @@ const SQLQueryBox = () => {
         className="sql-input"
       />
       <br />
-      <button className="run-button" onClick={handleRunQuery}>Run Query</button>
+      <button className="run-button" onClick={handleRunQuery}>
+        Run Query
+      </button>
 
       {error && <p className="error-message">{error}</p>}
 
-      {results && (
+      {results && results.length > 0 && (
         <div className="result-box">
           <h4>Results:</h4>
-          <pre>{JSON.stringify(results, null, 2)}</pre>
+          <table className="results-table">
+            <thead>
+              <tr>
+                {Object.keys(results[0]).map((col) => (
+                  <th key={col}>{col}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {results.map((row, i) => (
+                <tr key={i}>
+                  {Object.values(row).map((val, j) => (
+                    <td key={j}>{val}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      )}
+
+      {results && results.length === 0 && (
+        <p style={{ marginTop: '1rem' }}>No results found.</p>
       )}
     </div>
   )
