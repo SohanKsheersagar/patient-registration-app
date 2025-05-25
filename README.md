@@ -113,6 +113,3 @@ app/
 - Dynamic import paths for workers in Next.js → used `new URL(..., import.meta.url)` or fallback via `window.location.origin`
 
 
-
-- Name: [Your Name]
-- Email: [your.email@example.com]
