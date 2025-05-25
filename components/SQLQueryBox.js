@@ -8,6 +8,7 @@ const SQLQueryBox = () => {
   const [error, setError] = useState('')
 
   const handleRunQuery = async () => {
+    console.log("clicked")
     setError('')
     try {
       const db = await getDb()

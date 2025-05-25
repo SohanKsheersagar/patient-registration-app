@@ -11,6 +11,7 @@ const PatientForm = () => {
   const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
+    console.log("pressed")
     e.preventDefault()
   
     if (!name || !age || !phone || !gender || !medicalHistory) {
