@@ -1,6 +1,6 @@
 # 🏥 Patient Registration App
 
-This is a **frontend-only web app** built using Next.js and PGlite, developed as part of the Medblocks fresher assignment.
+This is a **frontend-only web app** built with React using Next.js and PGlite, deployed using vercel.
 
 ---
 
@@ -14,13 +14,13 @@ This is a **frontend-only web app** built using Next.js and PGlite, developed as
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-👉 [https://patient-registration-app-zeta.vercel.app](https://patient-registration-app-zeta.vercel.app)
+[https://patient-registration-app-zeta.vercel.app](https://patient-registration-app-zeta.vercel.app)
 
 ---
 
-## 🧠 Tech Stack
+## Tech Stack
 
 - [Next.js](https://nextjs.org/)
 - [React](https://react.dev/)
@@ -35,7 +35,7 @@ This is a **frontend-only web app** built using Next.js and PGlite, developed as
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/your-username/patient-registration-app.git
+git clone https://github.com/SohanKsheersagar/patient-registration-app.git
 cd patient-registration-app
 ```
 
@@ -58,7 +58,7 @@ npm run dev
 
 ---
 
-## 🧪 Multi-Tab Synchronization
+## Multi-Tab Synchronization
 
 This app uses a **PGliteWorker** to synchronize a single Postgres-like database across multiple browser tabs:
 
@@ -70,7 +70,7 @@ This app uses a **PGliteWorker** to synchronize a single Postgres-like database 
 
 ---
 
-## 🧾 How to Test It
+## How to Test It
 
 1. Open two tabs:
    - Tab A: https://patient-registration-app-zeta.vercel.app
@@ -86,7 +86,7 @@ SELECT * FROM patients;
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 components/
@@ -106,23 +106,13 @@ app/
 
 ---
 
-## 🚧 Challenges Faced
+## Challenges Faced
 
 - `PGlite` is single-connection by default → solved using `PGliteWorker` with leader election
 - Web Workers in Next.js require proper ESM config → fixed using `esmExternals: 'loose'`
 - Dynamic import paths for workers in Next.js → used `new URL(..., import.meta.url)` or fallback via `window.location.origin`
 
----
 
-## ✅ Status
-
-✅ Assignment complete.  
-✅ All features implemented and tested.  
-✅ Live deployment available.
-
----
-
-## 🧑‍💻 Author
 
 - Name: [Your Name]
 - Email: [your.email@example.com]
