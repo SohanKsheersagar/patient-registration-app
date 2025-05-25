@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 Patient Registration App
 
-## Getting Started
+This is a **frontend-only web app** built using Next.js and PGlite, developed as part of the Medblocks fresher assignment.
 
-First, run the development server:
+---
+
+## ✅ Features
+
+- ✅ Register new patients using a validated form
+- ✅ Execute raw SQL queries via a browser-based interface
+- ✅ Persistent storage using IndexedDB (via PGlite)
+- ✅ True multi-tab support using a shared Web Worker
+- ✅ SQL query results rendered in a clean HTML table
+
+---
+
+## 🌐 Live Demo
+
+👉 [https://patient-registration-app-zeta.vercel.app](https://patient-registration-app-zeta.vercel.app)
+
+---
+
+## 🧠 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [PGlite](https://pglite.dev/) (Postgres in the browser)
+- Shared Web Worker for multi-tab synchronization
+- IndexedDB for local persistence
+
+---
+
+## 📦 Setup Instructions
+
+1. Clone the repo:
+
+```bash
+git clone https://github.com/your-username/patient-registration-app.git
+cd patient-registration-app
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open the app in your browser:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Register page: http://localhost:3000
+- SQL query page: http://localhost:3000/query
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧪 Multi-Tab Synchronization
 
-To learn more about Next.js, take a look at the following resources:
+This app uses a **PGliteWorker** to synchronize a single Postgres-like database across multiple browser tabs:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- All tabs read/write to the same `idb://patients-db` database
+- Synchronization is handled via leader election using `@electric-sql/pglite/worker`
+- Powered by a shared worker (`public/my-pglite-worker.js`)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> ✅ Real-time query results in one tab reflect data inserted from another
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧾 How to Test It
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Open two tabs:
+   - Tab A: https://patient-registration-app-zeta.vercel.app
+   - Tab B: same link, go to `/query`
+2. In Tab A, register a new patient
+3. In Tab B, run:
+
+```sql
+SELECT * FROM patients;
+```
+
+4. ✅ See the updated data immediately
+
+---
+
+## 📁 Folder Structure
+
+```
+components/
+  PatientForm.js
+  SQLQueryBox.js
+
+lib/
+  database.js             ← connects to shared PGlite worker
+
+public/
+  my-pglite-worker.js     ← worker that runs the DB engine
+
+app/
+  page.js                 ← main registration page
+  query/page.js           ← SQL query interface
+```
+
+---
+
+## 🚧 Challenges Faced
+
+- `PGlite` is single-connection by default → solved using `PGliteWorker` with leader election
+- Web Workers in Next.js require proper ESM config → fixed using `esmExternals: 'loose'`
+- Dynamic import paths for workers in Next.js → used `new URL(..., import.meta.url)` or fallback via `window.location.origin`
+
+---
+
+## ✅ Status
+
+✅ Assignment complete.  
+✅ All features implemented and tested.  
+✅ Live deployment available.
+
+---
+
+## 🧑‍💻 Author
+
+- Name: [Your Name]
+- Email: [your.email@example.com]
